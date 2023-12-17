@@ -1,0 +1,71 @@
+/* * {
+    color : #091c31;
+} */
+
+
+body {
+    background-color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+
+#counterdiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    color: #ff00fb;
+}
+
+#incbutton {
+    background-color: #091c31;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin: 1rem;
+    padding: 1rem;
+    width: 10rem;
+
+}
+
+#incdiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#resetdiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#resetbutton {
+    background-color: #091c31;
+    border: none;
+    border-radius: 5px;
+    color: #43f03a;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin: 1rem;
+    padding: 1rem;
+    width: 10rem;
+}
+
+
+
+
+

@@ -1,0 +1,20 @@
+//- set default value for counter to 0
+//- - var counter = 0
+doctype html
+html
+    head
+        title My Pug Page
+        link(rel='stylesheet', href='style.css', type='text/css')
+        //- link htmx
+        script(src='https://unpkg.com/htmx.org@1.9.9')
+        
+    body
+        div#incdiv
+            button#incbutton(type='button', hx-get='/click', hx-swap='innerHTML', hx-target='#counterdiv') Click Me to increment!
+        div#counterdiv
+            p Counter is at #{counter}
+
+        #resetdiv 
+            button#resetbutton(type='button', hx-get='/reset', hx-swap='innerHTML', hx-target='#counterdiv') Reset Counter
+            
+
