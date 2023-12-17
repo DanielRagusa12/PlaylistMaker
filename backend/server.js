@@ -19,7 +19,7 @@ app.set('view engine', 'ejs')
 
 
 
-app.use(express.static(path.join(__dirname, './../frontend/public/')))
+app.use(express.static(path.join(__dirname, './../frontend/public/')))``
 app.set('views', path.join(__dirname, './../frontend/views/'))
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
