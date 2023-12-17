@@ -25,6 +25,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.json())
 // use pug
+
+
 app.set('view engine', 'pug')
 app.use('/', routes)
 
