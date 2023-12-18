@@ -3,8 +3,12 @@ const mongoose = require('mongoose')
 var cors = require('cors')
 require('dotenv').config()
 const path = require('path')
-
 const routes = require('./routes/routes')
+const session = require('express-session')
+
+
+
+
 
 const app = express()
 
@@ -16,19 +20,26 @@ app.use((req, res, next) => {
     next()
 })
 app.set('view engine', 'ejs')
+app.use(cors())
 
 
 
-app.use(express.static(path.join(__dirname, './../frontend/public/')))``
+app.use(express.static(path.join(__dirname, './../frontend/public/')))
 app.set('views', path.join(__dirname, './../frontend/views/'))
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+
 app.use(express.json())
-// use pug
+app.use(session({
+    secret: 'your-secret-key', // Replace with a strong secret key
+    resave: false,
+    saveUninitialized: false,
+  }));
 
 
 app.set('view engine', 'pug')
 app.use('/', routes)
+
+
 
 
 

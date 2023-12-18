@@ -7,14 +7,36 @@ html
         link(rel='stylesheet', href='style.css', type='text/css')
         //- link htmx
         script(src='https://unpkg.com/htmx.org@1.9.9')
-        
+        script.
+            function toggleDropdown() {
+                var dropdownContent = document.querySelector('.dropdown-content');
+                if (dropdownContent.style.display === 'none') {
+                    dropdownContent.style.display = 'block';
+                } else {
+                    dropdownContent.style.display = 'none';
+                }
+            }
+
+                
     body
+        #navbar
+            if user_id
+                div#userDetails.dropdown
+                    //- profile picture
+                    if profile_pic
+                        img#profilePic.dropdown-toggle(src=profile_pic, onclick='toggleDropdown()', title=user_id)
+                    else
+                        img#profilePic.dropdown-toggle(src='http://localhost:4000/default.jpg', onclick='toggleDropdown()', title=user_id)
+                    div.dropdown-content(style='display: none;')
+                        a#signout(href='#') Sign Out
+            else
+                a#signin(href='/login') Login
         div#incdiv
+            //- a(href='/click') Increment
             button#incbutton(type='button', hx-get='/click', hx-swap='innerHTML', hx-target='#counterdiv') Click Me to increment!
         div#counterdiv
             p Counter is at #{counter}
 
         #resetdiv 
-            button#resetbutton(type='button', hx-get='/reset', hx-swap='innerHTML', hx-target='#counterdiv') Reset Counter
-            
+            button#resetbutton(type='button', hx-get='/getPlaylists', hx-swap='innerHTML', hx-target='#counterdiv') Get Playlists            
 
