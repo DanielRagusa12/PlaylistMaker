@@ -9,6 +9,15 @@ var stateKey = 'spotify_auth_state';
 
 let counter = 0;
 
+const signout = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return console.log(err);
+        }
+        res.redirect('/');
+    });
+};
+
 
 
 const isAuth = (req, res, next) => {
@@ -102,12 +111,12 @@ const callback = (req, res) => {
                 }
                 console.log(req.session.profile_pic)
 
+                // get users playlists to display after login
+                // getPlaylists(req, res, () => {
+                //     res.redirect('/');
+                // });
                 res.redirect('/');
-
-                
             });
-
-             
 
         }   else {
             res.redirect('/#' +
@@ -120,11 +129,21 @@ const callback = (req, res) => {
 
 
 
-const home = (req, res) => {
-    
+const home = async (req, res) => {
+    if (req.session.access_token) {
+        // update playlists
+        await getPlaylists(req, res, () => {
+            console.log("playlists updated")
+        });
+    }
 
     try {
-        res.status(200).render('index', {counter: counter, user_id: req.session.user_id, profile_pic: req.session.profile_pic})    
+        res.status(200).render('index', {
+            counter: counter, 
+            user_id: req.session.user_id, 
+            profile_pic: req.session.profile_pic,
+            user_playlists: req.session.playlists
+        })    
     }
 
     catch (err) {
@@ -133,48 +152,23 @@ const home = (req, res) => {
     
 }
 
-const click = (req, res) => {
-    
-    
-    try {
-        counter++
-        res.status(200).render('click', {counter: counter})
-    }
 
-    catch (err) {
-        res.status(400).json({ message: err.message })
-    }
-    
-}
-
-const reset = (req, res) => {
-    try {
-        counter = 0
-        res.status(200).render('click', {counter: counter})
-    }
-
-    catch (err) {
-        res.status(400).json({ message: err.message })
-    }
-    
-}
 
 const getPlaylists = (req, res) => {
-    var options = {
-        url: 'https://api.spotify.com/v1/users/' + req.session.user_id + '/playlists',
-        headers: { 'Authorization': 'Bearer ' + req.session.access_token },
-        json: true
-    };
+    return new Promise((resolve, reject) => {
+        var options = {
+            url: 'https://api.spotify.com/v1/users/' + req.session.user_id + '/playlists',
+            headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+            json: true
+        };
 
-    // log users id
-    console.log(req.session.user_id)
-    request.get(options, function(error, response, body) {
-        console.log(body);
-        res.end();
-    });
-
-
-    
+        request.get(options, function(error, response, body) {
+            // console.log(body);
+            req.session.playlists = body.items
+            console.log(req.session.playlists)
+            resolve();
+        });  
+});
 }
 
 
@@ -182,4 +176,5 @@ const getPlaylists = (req, res) => {
 
 
 
-module.exports = {home, click, reset, login, callback, isAuth, getPlaylists}
+
+module.exports = {home, login, callback, isAuth, getPlaylists, signout}

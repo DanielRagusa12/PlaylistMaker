@@ -20,6 +20,7 @@ html
                 
     body
         #navbar
+            a#home(href='/') playlistMaker
             if user_id
                 div#userDetails.dropdown
                     //- profile picture
@@ -28,15 +29,28 @@ html
                     else
                         img#profilePic.dropdown-toggle(src='http://localhost:4000/default.jpg', onclick='toggleDropdown()', title=user_id)
                     div.dropdown-content(style='display: none;')
-                        a#signout(href='#') Sign Out
+                        a#signout(href='/signout') Sign Out
             else
                 a#signin(href='/login') Login
-        div#incdiv
-            //- a(href='/click') Increment
-            button#incbutton(type='button', hx-get='/click', hx-swap='innerHTML', hx-target='#counterdiv') Click Me to increment!
-        div#counterdiv
-            p Counter is at #{counter}
+        #main
+            if !user_id
+                h1#loginmessage Please login with spotify to get started
+            else 
+                #playlistResults
+                    h1#playlistResultsHeader #{user_id}'s playlists
+                    each playlist in user_playlists
+                        //- image of playlist
+                        #playlist
+                            img#playlistimg(src=playlist.images[0].url, title=playlist.name, onclick='window.location.href="/playlist/" + playlist.id')
+                            h2#playlistname= playlist.name
 
-        #resetdiv 
-            button#resetbutton(type='button', hx-get='/getPlaylists', hx-swap='innerHTML', hx-target='#counterdiv') Get Playlists            
+                
+
+    
+        
+
+
+        
+
+                    
 
