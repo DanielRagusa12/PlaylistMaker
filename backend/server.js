@@ -5,6 +5,8 @@ require('dotenv').config()
 const path = require('path')
 const routes = require('./routes/routes')
 const session = require('express-session')
+const MongoStore = require('connect-mongo');
+
 
 
 
@@ -30,9 +32,14 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(express.json())
 app.use(session({
-    secret: 'your-secret-key', // Replace with a strong secret key
+    secret: process.env.SESSION_SECRET, // Replace with a strong secret key
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI,
+        collectionName: 'sessions',
+        ttl: 60 * 60 * 24 * 7 // = 7 days. Default
+    })
   }));
 
 
