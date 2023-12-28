@@ -3,7 +3,7 @@
 doctype html
 html
     head
-        title My Pug Page
+        title playlistMaker
         link(rel='stylesheet', href='style.css', type='text/css')
         //- link htmx
         script(src='https://unpkg.com/htmx.org@1.9.9')
@@ -41,8 +41,15 @@ html
                     each playlist in user_playlists
                         //- image of playlist
                         #playlist
-                            img#playlistimg(src=playlist.images[0].url, title=playlist.name, onclick='window.location.href="/playlist/" + playlist.id')
+                            if playlist.images[0]
+                                img#playlistimg(src=playlist.images[0].url)
+                            else
+                                img#playlistimg(src='http://localhost:4000/default.jpg')
                             h2#playlistname= playlist.name
+                            #playlistmetadata 
+                                a(href=playlist.external_urls.spotify) View on Spotify
+                                h3 #{playlist.tracks.total} tracks
+                                
 
                 
 

@@ -7,6 +7,9 @@ const axios = require('axios');
 
 
 
+
+
+
 const signout = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -31,10 +34,7 @@ const isAuth = (req, res, next) => {
         }
         else {
             res.redirect('/login')
-
-        }
-        
-        
+        }    
     }
 };
 
@@ -149,9 +149,13 @@ const getPlaylists = async (req, res) => {
             headers: { 'Authorization': 'Bearer ' + req.session.access_token },
             json: true
         });
+        console.log(response.data.items);
 
-        req.session.playlists = response.data.items;
-        // console.log(req.session.playlists);
+        // req.session.playlists = response.data.items;
+        // delete playlists that are not owned by user
+        req.session.playlists = response.data.items.filter(playlist => playlist.owner.id === req.session.user_id)
+        
+
     } catch (error) {
         console.log(error);
         throw error; // This will be caught by the calling function
