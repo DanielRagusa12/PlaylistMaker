@@ -144,58 +144,74 @@ body {
 }
 
 #playlist {
-    /* remove underlining */
+    display: flex;
+    justify-content: space-between;
     text-decoration: none;
     color: #fff;
-    /* font size */
     font-size: 0.60rem;
-    /* background color */
-    /* background-color: #000000; */
     border: 2px solid #000;
     padding: 20px;
-    margin: 50px;  
+    margin: 50px;
+
 }
+#playlistLeft {
+    display: flex;
+    flex-direction: column;
+}
+
 
 
 /* CSS for large screens */
 @media (min-width: 1200px) {
     #playlistResults {
-
-        /* Your CSS for large screens goes here */
         display: flex;
         flex-direction: column;
-        /* pad from the left */
+        justify-content: flex-start; /* Align items to the top */
         margin-left: 20rem;
-        /* pad from the right */
         margin-right: 20rem;
     }
 }
   
-  /* CSS for medium screens */
-  @media (min-width: 768px) and (max-width: 1199px) {
+/* CSS for medium screens */
+@media (min-width: 768px) and (max-width: 1199px) {
     #playlistResults {
-        /* Your CSS for medium screens goes here */
         display: flex;
         flex-direction: column;
-        /* pad from the left */
+        justify-content: flex-start; /* Align items to the top */
         margin-left: 10rem;
-        /* pad from the right */
         margin-right: 10rem;
     }
 }
   
-  /* CSS for small screens */
-  @media (max-width: 767px) {
+/* CSS for small screens */
+@media (max-width: 767px) {
     #playlistResults {
-        /* Your CSS for small screens goes here */
         display: flex;
         flex-direction: column;
-        /* pad from the left */
+        justify-content: flex-start; /* Align items to the top */
         margin-left: 20rem;
-        /* pad from the right */
         margin-right: 20rem;
     }
 }
+
+#playlistcontent {
+    display: flex;
+    justify-content: space-between;
+    /* move to top */
+}
+
+#playlistmetadata {
+    margin-top: 20px; /* Or add space above the metadata */
+}
+
+
+#playlistactions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
 
 
 

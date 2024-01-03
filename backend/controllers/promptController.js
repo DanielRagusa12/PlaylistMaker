@@ -4,9 +4,40 @@ const querystring = require('querystring');
 const randomstring = require('randomstring');
 const axios = require('axios');
 
+const refreshAccessToken = async (req, res, next) => {
 
+    
+    if (Date.now() - req.session.token_received_at < req.session.expires_in * 1000) {
+        console.log("token is still valid")
+        next();
+    }
+    else {
+        try {
+            response = await axios.post('https://accounts.spotify.com/api/token', querystring.stringify({
+                refresh_token: req.session.refresh_token,
+                grant_type: 'refresh_token'
+            }), {
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded',
+                    'Authorization': 'Basic ' + (new Buffer.from(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64')),
+                    json: true
+                }
+            });
 
-
+            if (response.status === 200) {
+                req.session.access_token = response.data.access_token;
+                req.session.token_received_at = Date.now(); // store the time when the token was received
+                req.session.expires_in = response.data.expires_in;
+                req.session.scope = response.data.scope;
+                console.log("token refreshed")
+            }
+        } catch (error) {
+            console.log(error);
+            throw error
+        }
+    }
+    
+}
 
 
 
@@ -15,7 +46,7 @@ const signout = (req, res) => {
         if (err) {
             return err;
         }
-        res.redirect('/');
+        res.redirect('/welcome');
     });
 };
 
@@ -33,7 +64,7 @@ const isAuth = (req, res, next) => {
             res.end()
         }
         else {
-            res.redirect('/login')
+            res.redirect('/welcome')
         }    
     }
 };
@@ -49,7 +80,7 @@ const login = (req, res) => {
     querystring.stringify({
     response_type: 'code',
     client_id: process.env.CLIENT_ID,
-    scope: "user-read-private user-read-email playlist-read-private playlist-read-collaborative",
+    scope: "user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private",
     redirect_uri: "http://localhost:4000/callback",
     state: state,
     show_dialog: true
@@ -87,6 +118,7 @@ const callback = async (req, res) => {
 
             if (response.status === 200) {
                 req.session.access_token = response.data.access_token;
+                req.session.token_received_at = Date.now(); // store the time when the token was received
                 req.session.refresh_token = response.data.refresh_token;
                 req.session.expires_in = response.data.expires_in;
                 req.session.scope = response.data.scope;
@@ -117,6 +149,17 @@ const callback = async (req, res) => {
         }
     }
 };
+
+const landingPage = async (req, res) => {
+    try {
+        res.status(200).render('landingpage');
+    }
+
+    catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+    
+}
 
 
 
@@ -149,13 +192,13 @@ const getPlaylists = async (req, res) => {
             headers: { 'Authorization': 'Bearer ' + req.session.access_token },
             json: true
         });
-        console.log(response.data.items);
+        // console.log(response.data.items);
 
         // req.session.playlists = response.data.items;
         // delete playlists that are not owned by user
         req.session.playlists = response.data.items.filter(playlist => playlist.owner.id === req.session.user_id)
         
-
+        
     } catch (error) {
         console.log(error);
         throw error; // This will be caught by the calling function
@@ -168,4 +211,6 @@ const getPlaylists = async (req, res) => {
 
 
 
-module.exports = {home, login, callback, isAuth, getPlaylists, signout}
+
+
+module.exports = {home, login, callback, isAuth, getPlaylists, signout, refreshAccessToken, landingPage}

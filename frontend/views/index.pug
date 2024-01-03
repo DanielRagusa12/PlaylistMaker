@@ -4,7 +4,7 @@ doctype html
 html
     head
         title playlistMaker
-        link(rel='stylesheet', href='style.css', type='text/css')
+        link(rel='stylesheet', href='home.css', type='text/css')
         //- link htmx
         script(src='https://unpkg.com/htmx.org@1.9.9')
         script.
@@ -37,18 +37,27 @@ html
                 h1#loginmessage Please login with spotify to get started
             else 
                 #playlistResults
-                    h1#playlistResultsHeader #{user_id}'s playlists
-                    each playlist in user_playlists
-                        //- image of playlist
-                        #playlist
-                            if playlist.images[0]
-                                img#playlistimg(src=playlist.images[0].url)
-                            else
-                                img#playlistimg(src='http://localhost:4000/default.jpg')
-                            h2#playlistname= playlist.name
-                            #playlistmetadata 
-                                a(href=playlist.external_urls.spotify) View on Spotify
-                                h3 #{playlist.tracks.total} tracks
+                    if user_playlists.length == 0
+                        h1#playlistResultsHeader #{user_id} has no playlists
+                    else
+                        h1#playlistResultsHeader #{user_id}'s playlists
+                        each playlist in user_playlists
+                            //- image of playlist
+                            #playlist
+                                #playlistLeft
+                                    if playlist.images[0]
+                                        img#playlistimg(src=playlist.images[0].url)
+                                    else
+                                        img#playlistimg(src='http://localhost:4000/default.jpg')
+                                    #playlistmetadata 
+                                        a(href=playlist.external_urls.spotify) View on Spotify
+                                        h3 #{playlist.tracks.total} tracks
+                                #playlistactions
+                                    form#addSongsForm(action='/addSongs', method='POST')
+                                        input(type='hidden', name='playlist_id', value=playlist.id)
+                                        input(type='number', name='num_songs', placeholder='Number of songs to add', min='1', max='100')
+                                        input(type='submit', value='Add Songs')
+                                    button#deleteButton Delete Playlist
                                 
 
                 
