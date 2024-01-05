@@ -1,0 +1,21 @@
+script(src="https://unpkg.com/htmx.org@1.9.10")
+div#songs(style='height: 400px; overflow-y: scroll; overflow-x: hidden;')
+    each song in songs 
+        h1#songandartistname #{song.name} by #{song.artists[0].name}
+        div#previews(style='display: flex; align-items: center; justify-content: space-between;')
+            a(href=song.external_urls.spotify, target='_blank')
+                img#spotifylogosongs(src='http://localhost:4000/spotify.png', alt='Spotify Logo', style='margin-right: 10px;')
+            if song.preview_url
+                audio#audiocontroller(controls)
+                    source(src=song.preview_url, type='audio/mpeg')
+            else
+                p#nopreview No preview available
+            //- h3 for song uri and playlistid
+            //- p #{song.uri}
+            //- p #{playlist_id}
+            button#addSongButton(
+                hx-post='/addSong'
+                hx-vals=`{ "trackUri": "${song.uri}", "playlistId": "${playlist_id}" }`
+                hx-trigger='click'
+                hx-swap='outerHTML'
+            ) Add

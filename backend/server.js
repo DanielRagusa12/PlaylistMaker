@@ -8,14 +8,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo');
 
 
-
-
-
-
 const app = express()
-
-
-
 
 app.use((req, res, next) => {
     console.log(req.path, req.method)
@@ -25,12 +18,12 @@ app.set('view engine', 'ejs')
 app.use(cors())
 
 
-
 app.use(express.static(path.join(__dirname, './../frontend/public/')))
 app.set('views', path.join(__dirname, './../frontend/views/'))
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json())
+
 app.use(session({
     secret: process.env.SESSION_SECRET, // Replace with a strong secret key
     resave: false,

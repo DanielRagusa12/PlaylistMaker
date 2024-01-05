@@ -1,11 +1,21 @@
 /* * {
     color : #091c31;
 } */
+/* import sans frans font */
+@font-face {
+    font-family: 'SF Pro Display Light';
+    src: url('./SF-Pro-Display-Light.woff2') format('woff2');
+    /* Add other formats if available */
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 body {
-    background-color: #141212;
-    font-family: 'Roboto', sans-serif;
+    background-color: #151616;
+    /* font-family: 'Roboto', sans-serif; */
+    /* san fransisco font */
+    font-family: 'SF Pro Display Light';
     font-size: 16px;
     margin: 0;
     padding: 0;
@@ -43,17 +53,7 @@ body {
 }
 
 
-#userDetails {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    /* move all the way to the right */
-    margin-left: auto;
-    /* move some to the left */
-    margin-right: 7rem;
 
- 
-}
 
 #username {
     background-color: #000000;
@@ -84,11 +84,48 @@ body {
     top: 60px; /* height of the picture plus margin */
 }
 
+#userDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    align-items: center;
+    gap: 5px;
+    /* move all the way to the right */
+    margin-left: auto;
+    /* move some to the left */
+    margin-right: 7rem;
+
+ 
+}
+
 #signout {
     /* remove underlining */
     text-decoration: none;
-
+    /* add background color */
+    background-color: #000000; /* for example, green */
+    /* change text color */
+    color: white;
+    /* add some padding */
+    padding: 10px 24px;
+    /* add border */
+    border: none;
+    /* add border radius */
+    border-radius: 4px;
+    /* add cursor pointer */
+    cursor: pointer;
+    /* add some hover effect */
+    transition: background-color 0.3s ease;
+    /* center text */
+    text-align: center;
+    /* add full width */
+    width: 20%;
+    height: 25%;
+    font-size: small;
 }
+
+
 
 #loginmessage {
     color: #fff;
@@ -127,15 +164,7 @@ body {
     
 }
 
-#playlistResults {
-    /* display top to bottom */
-    display: flex;
-    flex-direction: column;
-    /* pad from the left */
-    margin-left: 20rem;
-    /* pad from the right */
-    margin-right: 20rem;
-}
+
 
 #playlistimg {
     border-radius: 5px;
@@ -150,8 +179,9 @@ body {
     color: #fff;
     font-size: 0.60rem;
     border: 2px solid #000;
-    padding: 20px;
-    margin: 50px;
+    padding: 10px;
+    margin: 25px;
+    background-color: #000000;
 
 }
 #playlistLeft {
@@ -167,8 +197,8 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: flex-start; /* Align items to the top */
-        margin-left: 20rem;
-        margin-right: 20rem;
+        margin-left: 30rem;
+        margin-right: 30rem;
     }
 }
   
@@ -178,8 +208,8 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: flex-start; /* Align items to the top */
-        margin-left: 10rem;
-        margin-right: 10rem;
+        margin-left: 5rem;
+        margin-right: 5rem;
     }
 }
   
@@ -189,8 +219,8 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: flex-start; /* Align items to the top */
-        margin-left: 20rem;
-        margin-right: 20rem;
+        margin-left: 17rem;
+        margin-right: 17rem;
     }
 }
 
@@ -201,7 +231,13 @@ body {
 }
 
 #playlistmetadata {
-    margin-top: 20px; /* Or add space above the metadata */
+    margin-top: 0px; /* Or add space above the metadata */
+    /* border */
+    /* border: 2px solid #00ff2f; */
+    width: 100%;
+    margin-right: 10%;
+    /* center */
+    text-align: center;
 }
 
 
@@ -212,8 +248,274 @@ body {
     align-items: flex-end;
 }
 
+#songandartistname {
+    font-size: small;
+    color: #ffffff;
+}
+
+#audiocontroller {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 90%;
+    
+}
 
 
+
+#generatebutton {
+    background-color: #1ED760;
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+    cursor: pointer;
+    
+    padding: 0.5rem;
+    
+    text-decoration: none;
+    
+    /* pad from the right */
+    /* margin-right: 10rem; */
+    /* center text */
+    text-align: center;
+    transition: box-shadow 0.2s ease-in-out;
+
+}
+
+#generatebutton:hover, #deleteButton:hover, #addSongButton:hover {
+    box-shadow: 0 0 3px #818181, 0 0 6px #818181, 0 0 9px #818181, 0 0 12px #818181;
+}
+
+#songs {
+    padding: 10px;
+    margin: 25px;
+    /* border: 2px solid #00ff2f; */
+    /* move up */
+    margin-top: 0.1px;
+    /* width: 300px; */
+    /* space betweeb elements */
+    animation: wipe 1s ease-out;
+
+    
+}
+
+#spotifylogosongs {
+    /* make circle */
+    border-radius: 50%;
+    /* make smaller */
+    height: 20px;
+    width: 20px;
+}
+
+#spotifylogoplaylists {
+    /* make circle */
+    border-radius: 50%;
+    /* make smaller */
+    height: 60px;
+    width: 60px;
+}
+
+#nopreview {
+    color: #ffffff;
+    margin-left: 20px;
+    font-size: small;
+    
+}
+
+
+#previews {
+    /* space between */
+    margin-top: 25px;
+}
+
+
+#deleteButton {
+    background-color: #f04b4b;
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+    cursor: pointer;
+    
+    
+    /* move to the right */
+    /* remove underlining */
+    text-decoration: none;
+    /* pad from the right */
+    /* center text */
+    text-align: center;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+
+
+.loader {
+    display: none; /* Hidden by default */
+    
+
+  }
+
+
+.loader.htmx-request {
+width: 48px;
+height: 48px;
+border-radius: 50%;
+display: inline-block;
+position: relative;
+border: 3px solid;
+border-color: #3b3838 #3b3838 transparent transparent;
+box-sizing: border-box;
+animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1, .30, 1) both;
+}
+.loader.htmx-request::after,
+.loader.htmx-request::before {
+content: '';  
+box-sizing: border-box;
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+margin: auto;
+border: 3px solid;
+border-color: transparent transparent #1ED760 #1ED760;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+box-sizing: border-box;
+animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1, .30, 1) both;
+transform-origin: center center;
+}
+.loader.htmx-request::before {
+width: 32px;
+height: 32px;
+border-color: #000000 #000000 transparent transparent;
+animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1, .30, 1) both;
+}
+    
+@keyframes rotation {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+} 
+@keyframes rotationBack {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(-360deg);
+}
+}
+
+#loaderparent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Or any specific height */
+    /* border */
+    
+  }
+
+  #addSongButton {
+    background-color: #1ED760;
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+    cursor: pointer;
+    padding: 0rem;
+    text-decoration: none;
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+#addedSongButton {
+    background-color: #414141;
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+    padding: 0rem;
+    text-decoration: none;
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+
+.generatedsongs {
+    animation: wipedown 2s ease-out forwards;
+
+}
+
+@keyframes wipe {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 400px;
+    }
+}
+      
+
+
+@keyframes circle-in-hesitate {
+    0% {
+      clip-path: circle(0%);
+    }
+    40% {
+      clip-path: circle(40%);
+    }
+    100% {
+      clip-path: circle(125%);
+    }
+  }
+  
+  [transition-style="in:circle:hesitate"] {
+    animation: 2.5s cubic-bezier(.25, 1, .30, 1) circle-in-hesitate both;
+  }
+
+
+  @keyframes wipe-cinematic-in {
+    0% {
+      clip-path: inset(100% 0 100% 0);
+    }
+    30%, 70% {
+      clip-path: inset(10% 0 10% 0);
+    }
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  
+  [transition-style="in:wipe:cinematic"] {
+     animation-name: wipe-cinematic-in;
+  }
+
+  /* This will apply to all <video> elements in Chrome and other WebKit-based browsers */
+
+
+  audio::-webkit-media-controls-play-button,
+  audio::-webkit-media-controls-panel {
+    height: 50px;
+    /* center text */
+  }
+
+
+
+/* video::-webkit-media-controls-play-button {
+
+}
+
+video::-webkit-media-controls-timeline {
+} */
 
 
 

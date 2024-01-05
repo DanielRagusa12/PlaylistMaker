@@ -3,6 +3,28 @@
 const querystring = require('querystring');
 const randomstring = require('randomstring');
 const axios = require('axios');
+const { get } = require('http');
+const fs = require('fs');
+const winston = require('winston');
+
+
+
+
+
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    transports: [
+        new winston.transports.File({ filename: 'combined.log' }),
+        new winston.transports.Console({ format: winston.format.simple() })
+    ],
+});
+
+console.log = logger.info.bind(logger);
+console.error = logger.error.bind(logger);
+console.warn = logger.warn.bind(logger);
+console.info = logger.info.bind(logger);
+
 
 const refreshAccessToken = async (req, res, next) => {
 
@@ -30,9 +52,10 @@ const refreshAccessToken = async (req, res, next) => {
                 req.session.expires_in = response.data.expires_in;
                 req.session.scope = response.data.scope;
                 console.log("token refreshed")
+                next();
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             throw error
         }
     }
@@ -144,13 +167,13 @@ const callback = async (req, res) => {
             }
 
         } catch (error) {
-            console.log(error);
+            console.error(error);
             throw error
         }
     }
 };
 
-const landingPage = async (req, res) => {
+const landingPage = (req, res) => {
     try {
         res.status(200).render('landingpage');
     }
@@ -200,11 +223,143 @@ const getPlaylists = async (req, res) => {
         
         
     } catch (error) {
-        console.log(error);
+        console.error(error);
         throw error; // This will be caught by the calling function
     }
 }
 
+const getTracks = async (req, res, playlist) => {
+    try {
+        playlist.retrievedTracks = [];
+
+        let limit;
+        if (playlist.tracks.total > 50) {
+            limit = 50;
+        }
+        else {
+            limit = playlist.tracks.total;
+        }
+        // offset should be random number between 0 and total - limit
+        let offset = Math.floor(Math.random() * (playlist.tracks.total - limit));
+        console.log(`offset: ${offset}`);
+        console.log(`limit: ${limit}`);
+
+
+
+        const response = await axios.get(playlist.tracks.href, {
+            headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+            json: true,
+            params: {
+                limit: limit,
+                offset: offset
+            }
+
+        });
+        playlist.retrievedTracks = response.data.items;
+        return response;
+        
+    } catch (error) {
+        console.error(error);
+        throw error; // This will be caught by the calling function
+    }
+}
+
+const generateSongs = async (req, res) => {
+    try {
+        // clear playlist.retrievedTracks
+        // get playlist id from req
+        // get playlist from session
+        const playlist = req.session.playlists.find(playlist => playlist.id === req.params.playlistId);
+        // reset retrievedTracks
+        console.log(`playlist id: ${playlist.id}`)
+        
+        if (playlist.tracks.total < 5) {
+            throw new Error("Not enough songs in playlist");
+        }
+
+        let response = await getTracks(req, res, playlist);
+        if (response.status === 200) {
+            // get 5 random track id's from playlist
+            const random_track_ids = [];
+            for (let i = 0; i < 5; i++) {
+                random_track_ids.push(playlist.retrievedTracks[Math.floor(Math.random() * playlist.retrievedTracks.length)].track.id);
+            }
+            // console.log(random_track_ids);
+            response = await getRecommendedTracks(req, res, random_track_ids);
+            // print resposne items
+            console.log(response.data.tracks)
+            res.status(200).render('generatedsongs', {songs: response.data.tracks, playlist_id: playlist.id})
+
+            
+           
+        }
+    }
+    catch (error) {
+        console.error(error);
+        throw error; // This will be caught by the calling function
+    }
+}
+
+const getRecommendedTracks = async (req, res, track_ids) => {
+    try {
+        // turn track id's into comma separated string
+        track_ids = track_ids.join();
+        
+        const response = await axios.get('https://api.spotify.com/v1/recommendations', {
+            headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+            json: true,
+            params: {
+                seed_tracks: track_ids,
+                limit: 20
+            }
+
+        });
+        return response;
+
+        
+        
+    } catch (error) {
+        // write error to log file
+        
+        if (error.response && error.response.headers) {
+            console.error('Headers:', error.response.headers);
+        }
+
+
+        throw error; // This will be caught by the calling function
+    }
+}
+
+const addSong = async (req, res) => {
+    try {
+        // get playlist id and track uri from req
+        const playlist_id = req.body.playlistId;
+        const track_uri = req.body.trackUri;
+        console.log(`playlist id: ${playlist_id}`);
+        console.log(`track uri: ${track_uri}`);
+        console.log('req.query:', req.body);
+        console.log(`acccess token: ${req.session.access_token}`)
+
+        response = await axios({
+            method: 'post',
+            url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks',
+            headers: { 'Authorization': 'Bearer ' + req.session.access_token },
+            data: {
+                uris: [track_uri],
+                position: 0
+            }
+        });
+        if (response.status === 201) {
+            console.log("song added to playlist")
+            res.status(200).render('addSongs')
+        }
+    }
+    catch (error) {
+        console.error(error);
+        throw error; // This will be caught by the calling function
+    }
+}
+    
 
 
 
@@ -213,4 +368,5 @@ const getPlaylists = async (req, res) => {
 
 
 
-module.exports = {home, login, callback, isAuth, getPlaylists, signout, refreshAccessToken, landingPage}
+
+module.exports = {home, login, callback, isAuth, getPlaylists, signout, refreshAccessToken, landingPage, generateSongs, addSong}
