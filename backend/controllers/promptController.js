@@ -114,12 +114,11 @@ const callback = async (req, res) => {
     var code = req.query.code || null;
     var state = req.query.state || null;
 
-    if (state === null) {
-        res.redirect('/#' +
-          querystring.stringify({
-            error: 'state_mismatch'
-          }));
-        } 
+    if (state === null || code === null) {
+        res.redirect('/welcome');
+    } 
+
+    
     else {
         
         try {
@@ -274,7 +273,10 @@ const generateSongs = async (req, res) => {
         console.log(`playlist id: ${playlist.id}`)
         
         if (playlist.tracks.total < 5) {
-            throw new Error("Not enough songs in playlist");
+            // modify htmx headers
+            res.setHeader('HX-Trigger', 'handleRes');
+            res.status(400).end();
+            return;
         }
 
         let response = await getTracks(req, res, playlist);

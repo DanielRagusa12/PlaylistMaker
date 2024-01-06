@@ -18,4 +18,8 @@ div#songs(style='height: 400px; overflow-y: scroll; overflow-x: hidden;')
                 hx-vals=`{ "trackUri": "${song.uri}", "playlistId": "${playlist_id}" }`
                 hx-trigger='click'
                 hx-swap='outerHTML'
+            
             ) Add
+            //- div#loaderparent
+            //-     span.loader(id=`loader-${song.uri}`)
+

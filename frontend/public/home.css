@@ -508,6 +508,20 @@ animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1
     /* center text */
   }
 
+  .toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #444;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+  }
+
 
 
 /* video::-webkit-media-controls-play-button {

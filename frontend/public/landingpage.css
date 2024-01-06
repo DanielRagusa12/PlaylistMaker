@@ -1,11 +1,23 @@
-
+@font-face {
+  font-family: 'SF Pro Display Light';
+  src: url('./SF-Pro-Display-Light.woff2') format('woff2');
+  /* Add other formats if available */
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
     background-color: #000000;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'SF Pro Display Light';
     margin: 0;
     padding: 0;
     font-size: 16px;
+    background-image: linear-gradient(45deg, #2fff6a 0%, #6fff9d 50%, #05deac 100%);
+    animation: gradient 7s ease infinite;
+    background-size: 200% 200%;
+    height: 100vh;
+
+
 
 }
 
@@ -29,13 +41,18 @@ body {
 
 
   #navbar {
-    background-color: #1ED760;
+    background-color: #000000;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0.25rem;
     width: 100%;
+    /* transparency */
+    /* blur */
+    /* height */
+    height: 3rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -50,13 +67,31 @@ body {
   text-decoration: none;
   margin-right: 10rem;
   text-align: center;
-  transition: background-color 0.3s ease;
   font-weight: 700;
+  /* rounded corners */
+  border-radius: 0.5rem;
+  /* vertically center font */
+  display: flex;
+  align-items: center;
+  /* height */
+  height: 0.5rem;
+  background-image: linear-gradient(45deg, #2fff6a 0%, #6fff9d 50%, #05deac 100%);
+  animation: gradient 7s ease infinite;
+  background-size: 200% 200%;
+  transition: background-image 1s ease;
+  
+
 }
 
 #signin:hover {
-  background-color: #000000;
-  color: #ffffff;
+  color : #ffffff;
+  background-image: linear-gradient(45deg, #2ffcff 0%, #6fe9ff 50%, #05a4de 100%);
+  animation: gradient 7s ease infinite;
+  background-size: 200% 200%;
+  /* fade */
+
+  
+  
 }
 
 #main {
@@ -67,11 +102,75 @@ body {
   /* padding */
   padding: 1rem;
   /* background color */
-  background-color: #ffffff;
   /* border radius */
   border-radius: 0.5rem;
   /* margin top */
   margin-top: 5rem;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#spinning-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  color: rgba(255, 255, 255, 0.3); /* Adjust color and opacity as needed */
+  z-index: -1;
+  animation: spin 10s linear infinite;
+  font-size: 55rem;
+  filter: blur(75px);
+  
+}
+
+#spinning-text2 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(19, 192, 255, 0.219); /* Adjust color and opacity as needed */
+  z-index: -1;
+  animation: spin 15s linear infinite reverse; /* Add 'reverse' here */
+  font-size: 250rem;
+  filter: blur(50px);
+  /* bold */
+  font-weight: 700;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+#welcome {
+  /* remove underlining */
+  text-decoration: none;
+  color: #ffffff;
+  margin-right: 1rem;
+  /* center */
+  text-align: center;
+  /* pad from the left */
+  margin-left: 7rem;
+  /* font */
+  font-size: 3rem;
+  /* hover color */
+  opacity: 0.70;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+
+
+  
+
 }
 
 

@@ -22,10 +22,40 @@ html
             function clearSongs(id) {
                 document.getElementById(id).innerHTML = '';
             }
+
+            
+
+            window.onload = function() {
+                function showToast() {
+                    console.log('showing toast');
+                    var toast = document.getElementById('toast');
+                    toast.style.opacity = 1;
+
+                    // Hide the toast message after 3 seconds
+                    setTimeout(function() {
+                        toast.style.opacity = 0;
+                    }, 3000);
+                }
+
+                function handleRes(event) {
+                    console.log("handleRes function called");
+                    var xhr = event.detail.xhr;
+                    if (xhr.status == 400) {
+                        showToast();
+                    }
+                }
+
+                document.body.addEventListener("handleRes", function(evt){
+                    showToast();
+                });
+            }
             
 
                 
     body
+        
+        div.toast-message(style='opacity: 0;', id=`toast`)
+            | Playlist has less than 5 tracks.
         #navbar
             a#home(href='/') playlistMaker
             if user_id
@@ -68,16 +98,23 @@ html
                                     form#addSongsForm(
                                         action=`/generateSongs/${playlist.id}`, 
                                         method='POST', hx-post=`/generateSongs/${playlist.id}`, 
-                                        hx-target=`#generatedsongs-${playlist.id}`, 
-                                        hx-swap='innerHTML', hx-indicator=`#loader-${playlist.id}`, 
-                                        hx-trigger="click delay:500"
+                                            hx-target=`#generatedsongs-${playlist.id}`, 
+                                            hx-swap='innerHTML', 
+                                            hx-indicator=`#loader-${playlist.id}`, 
+                                            hx-trigger="click delay:500"
+                                            hx-boost="true"
                                         )
-                                        input(type='hidden', name='playlist_id', value=playlist.id)
-                                        input#generatebutton(type='submit', value='Generate Songs', onclick=`clearSongs('generatedsongs-${playlist.id}')`)
+                                            input(type='hidden', name='playlist_id', value=playlist.id)
+                                            input#generatebutton(
+                                                type='submit', 
+                                                value='Generate Songs', 
+                                                onclick=`clearSongs('generatedsongs-${playlist.id}')`
+                                            )
                                     //- button#deleteButton Delete Playlist
                             .generatedsongs(id=`generatedsongs-${playlist.id}`)
                             div#loaderparent
                                     span.loader(id=`loader-${playlist.id}`)
+                            
                             
                            
                                 
