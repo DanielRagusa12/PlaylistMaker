@@ -7,6 +7,11 @@ const { get } = require('http');
 const fs = require('fs');
 const winston = require('winston');
 
+// create logs folder if it doesn't exist
+if (!fs.existsSync('./logs')) {
+    fs.mkdirSync('./logs');
+}
+
 
 
 
@@ -15,7 +20,7 @@ const logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),
     transports: [
-        new winston.transports.File({ filename: 'combined.log' }),
+        new winston.transports.File({ filename: 'logs/combined.log' }),
         new winston.transports.Console({ format: winston.format.simple() })
     ],
 });
