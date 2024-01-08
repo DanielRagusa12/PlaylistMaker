@@ -174,7 +174,7 @@ body {
 
 #playlist {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     text-decoration: none;
     color: #fff;
     font-size: 0.60rem;
@@ -185,8 +185,10 @@ body {
 
 }
 #playlistLeft {
-    display: flex;
-    flex-direction: column;
+    flex: 1;
+    
+    /* border */
+    /* border: 2px solid #00ff2f; */
 }
 
 
@@ -197,8 +199,8 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: flex-start; /* Align items to the top */
-        margin-left: 30rem;
-        margin-right: 30rem;
+        margin-left: 35rem;
+        margin-right: 35rem;
     }
 }
   
@@ -224,28 +226,26 @@ body {
     }
 }
 
-#playlistcontent {
-    display: flex;
-    justify-content: space-between;
-    /* move to top */
-}
+
 
 #playlistmetadata {
+    flex: 1;
     margin-top: 0px; /* Or add space above the metadata */
-    /* border */
-    /* border: 2px solid #00ff2f; */
-    width: 100%;
-    margin-right: 10%;
     /* center */
     text-align: center;
+    /* border */
+    /* border: 2px solid #00ff2f; */
 }
 
 
 #playlistactions {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+    /* border */
+    /* border: 2px solid #00ff2f; */
 }
 
 #songandartistname {
@@ -315,6 +315,9 @@ body {
     /* make smaller */
     height: 60px;
     width: 60px;
+    /* move right */
+    margin-left: 10px;
+    
 }
 
 #nopreview {
@@ -352,8 +355,6 @@ body {
 
 .loader {
     display: none; /* Hidden by default */
-    
-
   }
 
 
@@ -362,7 +363,7 @@ width: 48px;
 height: 48px;
 border-radius: 50%;
 display: inline-block;
-position: relative;
+position: relative; 
 border: 3px solid;
 border-color: #3b3838 #3b3838 transparent transparent;
 box-sizing: border-box;
@@ -412,13 +413,13 @@ animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1
 }
 
 #loaderparent {
+    
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%; /* Or any specific height */
-    /* border */
     
-  }
+    /* border */
+    /* border: 2px solid #00ff2f; */
+}
 
   #addSongButton {
     background-color: #1ED760;
