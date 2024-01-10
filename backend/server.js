@@ -7,15 +7,7 @@ const routes = require('./routes/routes');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
-const serverless = require('serverless-http');
-
-
-
 const app = express();
-
-const handler = serverless(app);
-
-
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
@@ -43,11 +35,6 @@ app.use(session({
 
 app.set('view engine', 'pug');
 app.use('/', routes);
-
-
-
-
-
 
 
 // if the request is not handled by any of the routes
