@@ -123,7 +123,7 @@ const callback = async (req, res) => {
             
             response = await axios.post('https://accounts.spotify.com/api/token', querystring.stringify({
                 code: code,
-                redirect_uri: "http://localhost:4000/callback",
+                redirect_uri: "https://htmx-web-app-3e9b7886afe4.herokuapp.com/callback",
                 grant_type: 'authorization_code'
             }), {
                 headers: {
