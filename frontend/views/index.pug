@@ -1,13 +1,8 @@
-
-
-//- set default value for counter to 0
-//- - var counter = 0
 doctype html
 html
     head
         title playlistMaker
         link(rel='stylesheet', href='home.css', type='text/css')
-        //- link htmx
         script(src="https://unpkg.com/htmx.org@1.9.10")
         script.
             function toggleDropdown() {
@@ -22,8 +17,6 @@ html
             function clearSongs(id) {
                 document.getElementById(id).innerHTML = '';
             }
-
-            
 
             window.onload = function() {
                 function showToast() {
@@ -48,85 +41,54 @@ html
                 document.body.addEventListener("handleRes", function(evt){
                     showToast();
                 });
-            }
-            
-
-                
+            }          
     body
-        
         div.toast-message(style='opacity: 0;', id=`toast`)
             | Playlist has less than 5 tracks.
         #navbar
             a#home(href='/') playlistMaker
             if user_id
                 div#userDetails.dropdown
-                    //- profile picture
                     if profile_pic
                         img#profilePic.dropdown-toggle(src=profile_pic, onclick='toggleDropdown()', title=user_id)
                     else
                         img#profilePic.dropdown-toggle(src='http://localhost:4000/default.jpg', onclick='toggleDropdown()', title=user_id)
                     div.dropdown-content(style='display: none;')
                         a#signout(href='/signout') Sign Out
-            else
-                a#signin(href='/login') Login
         #main
-            if !user_id
-                h1#loginmessage Please login with spotify to get started
-            else 
-                #playlistResults
-                    if user_playlists.length == 0
-                        h1#playlistResultsHeader #{user_id} has no playlists
-                    else
-                        //- h1#playlistResultsHeader #{user_id}'s playlists
-                        each playlist in user_playlists
-                            //- image of playlist
-                            #playlist
-                                #playlistLeft
-                                    if playlist.images[0]
-                                        img#playlistimg(src=playlist.images[0].url)
-                                    else
-                                        img#playlistimg(src='http://localhost:4000/default.jpg')
-                                #playlistmetadata
-                                    h1#playlistname #{playlist.name}
-                                    h3 #{playlist.tracks.total} tracks
-                                    a(href=playlist.external_urls.spotify, target='_blank')
-                                        img#spotifylogoplaylists(src='http://localhost:4000/spotify.png', alt='Spotify Logo', style='margin-right: 10px;')
-                                    
-                                    
-
-                                #playlistactions
-                                    form#addSongsForm(
-                                        action=`/generateSongs/${playlist.id}`, 
-                                        method='POST', hx-post=`/generateSongs/${playlist.id}`, 
-                                            hx-target=`#generatedsongs-${playlist.id}`, 
-                                            hx-swap='innerHTML', 
-                                            hx-indicator=`#loader-${playlist.id}`, 
-                                            hx-trigger="click delay:500"
-                                            hx-boost="true"
+            #playlistResults
+                if user_playlists.length == 0
+                    h1#playlistResultsHeader #{user_id} has no playlists
+                else
+                    each playlist in user_playlists
+                        //- image of playlist
+                        #playlist
+                            #playlistLeft
+                                if playlist.images[0]
+                                    img#playlistimg(src=playlist.images[0].url)
+                                else
+                                    img#playlistimg(src='http://localhost:4000/default.jpg')
+                            #playlistmetadata
+                                h1#playlistname #{playlist.name}
+                                h3 #{playlist.tracks.total} tracks
+                                a(href=playlist.external_urls.spotify, target='_blank')
+                                    img#spotifylogoplaylists(src='http://localhost:4000/spotify.png', alt='Spotify Logo', style='margin-right: 10px;')
+                            #playlistactions
+                                form#addSongsForm(
+                                    action=`/generateSongs/${playlist.id}`, 
+                                    method='POST', hx-post=`/generateSongs/${playlist.id}`, 
+                                        hx-target=`#generatedsongs-${playlist.id}`, 
+                                        hx-swap='innerHTML', 
+                                        hx-indicator=`#loader-${playlist.id}`, 
+                                        hx-trigger="click delay:500"
+                                        hx-boost="true"
+                                    )
+                                        input(type='hidden', name='playlist_id', value=playlist.id)
+                                        input#generatebutton(
+                                            type='submit', 
+                                            value='Generate Songs', 
+                                            onclick=`clearSongs('generatedsongs-${playlist.id}')`
                                         )
-                                            input(type='hidden', name='playlist_id', value=playlist.id)
-                                            input#generatebutton(
-                                                type='submit', 
-                                                value='Generate Songs', 
-                                                onclick=`clearSongs('generatedsongs-${playlist.id}')`
-                                            )
-                                    //- button#deleteButton Delete Playlist
-                            .generatedsongs(id=`generatedsongs-${playlist.id}`)
-                            div#loaderparent
-                                    span.loader(id=`loader-${playlist.id}`)
-                            
-                            
-                           
-                                
-                                
-
-                
-
-    
-        
-
-
-        
-
-                    
-
+                        .generatedsongs(id=`generatedsongs-${playlist.id}`)
+                        div#loaderparent
+                                span.loader(id=`loader-${playlist.id}`)

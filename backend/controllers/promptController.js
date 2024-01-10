@@ -1,9 +1,6 @@
-// const { default: mongoose } = require('mongoose')
-// const Hero = require('../models/db')
 const querystring = require('querystring');
 const randomstring = require('randomstring');
 const axios = require('axios');
-const { get } = require('http');
 const fs = require('fs');
 const winston = require('winston');
 
@@ -11,10 +8,6 @@ const winston = require('winston');
 if (!fs.existsSync('./logs')) {
     fs.mkdirSync('./logs');
 }
-
-
-
-
 
 const logger = winston.createLogger({
     level: 'info',
@@ -24,7 +17,6 @@ const logger = winston.createLogger({
         new winston.transports.Console({ format: winston.format.simple() })
     ],
 });
-
 console.log = logger.info.bind(logger);
 console.error = logger.error.bind(logger);
 console.warn = logger.warn.bind(logger);
@@ -61,7 +53,7 @@ const refreshAccessToken = async (req, res, next) => {
             }
         } catch (error) {
             console.error(error);
-            throw error
+            res.status(500).render('error', {status: 500});
         }
     }
     
@@ -76,26 +68,26 @@ const signout = (req, res) => {
         }
         res.redirect('/welcome');
     });
-};
+}
 
 
 
 const isAuth = (req, res, next) => {
     if (req.session.access_token) {
-        next()
+        next();
     } else {
         // check if it is a htmx request
         if (req.headers['hx-request']) {
             // set redirect url header
-            console.log("htmx request!")
-            res.setHeader('HX-Redirect', '/login')
-            res.end()
+            console.log("htmx request!");
+            res.setHeader('HX-Redirect', '/login');
+            res.end();
         }
         else {
-            res.redirect('/welcome')
+            res.redirect('/welcome');
         }    
     }
-};
+}
 
 
 
@@ -113,7 +105,7 @@ const login = (req, res) => {
     state: state,
     show_dialog: true
     }));   
-};
+}
 
 const callback = async (req, res) => {
     var code = req.query.code || null;
@@ -172,10 +164,10 @@ const callback = async (req, res) => {
 
         } catch (error) {
             console.error(error);
-            throw error
+            res.status(500).render('error', {status: 500});
         }
     }
-};
+}
 
 const landingPage = (req, res) => {
     try {
@@ -183,7 +175,8 @@ const landingPage = (req, res) => {
     }
 
     catch (err) {
-        res.status(400).json({ message: err.message });
+        console.error(err);
+        res.status(500).render('error', {status: 500});
     }
     
 }
@@ -202,11 +195,12 @@ const home = async (req, res) => {
             user_id: req.session.user_id, 
             profile_pic: req.session.profile_pic,
             user_playlists: req.session.playlists
-        })    
+        });
     }
 
     catch (err) {
-        res.status(400).json({ message: err.message })
+        console.error(err);
+        res.status(500).render('error', {status: 500});
     }
     
 }
@@ -223,12 +217,12 @@ const getPlaylists = async (req, res) => {
 
         // req.session.playlists = response.data.items;
         // delete playlists that are not owned by user
-        req.session.playlists = response.data.items.filter(playlist => playlist.owner.id === req.session.user_id)
+        req.session.playlists = response.data.items.filter(playlist => playlist.owner.id === req.session.user_id);
         
         
     } catch (error) {
         console.error(error);
-        throw error; // This will be caught by the calling function
+        res.status(500).render('error', {status: 500});
     }
 }
 
@@ -264,18 +258,15 @@ const getTracks = async (req, res, playlist) => {
         
     } catch (error) {
         console.error(error);
-        throw error; // This will be caught by the calling function
+        res.status(500).render('error', {status: 500});
     }
 }
 
 const generateSongs = async (req, res) => {
     try {
-        // clear playlist.retrievedTracks
-        // get playlist id from req
-        // get playlist from session
         const playlist = req.session.playlists.find(playlist => playlist.id === req.params.playlistId);
         // reset retrievedTracks
-        console.log(`playlist id: ${playlist.id}`)
+        console.log(`playlist id: ${playlist.id}`);
         
         if (playlist.tracks.total < 5) {
             // modify htmx headers
@@ -294,8 +285,8 @@ const generateSongs = async (req, res) => {
             // console.log(random_track_ids);
             response = await getRecommendedTracks(req, res, random_track_ids);
             // print resposne items
-            console.log(response.data.tracks)
-            res.status(200).render('generatedsongs', {songs: response.data.tracks, playlist_id: playlist.id})
+            console.log(response.data.tracks);
+            res.status(200).render('generatedsongs', {songs: response.data.tracks, playlist_id: playlist.id});
 
             
            
@@ -303,7 +294,7 @@ const generateSongs = async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        throw error; // This will be caught by the calling function
+        res.status(500).render('error', {status: 500});
     }
 }
 
@@ -326,26 +317,19 @@ const getRecommendedTracks = async (req, res, track_ids) => {
         
         
     } catch (error) {
-        // write error to log file
-        
-        if (error.response && error.response.headers) {
-            console.error('Headers:', error.response.headers);
-        }
-
-
-        throw error; // This will be caught by the calling function
+        console.error(error);
+        res.status(500).render('error', {status: 500});
     }
 }
 
 const addSong = async (req, res) => {
     try {
-        // get playlist id and track uri from req
         const playlist_id = req.body.playlistId;
         const track_uri = req.body.trackUri;
         console.log(`playlist id: ${playlist_id}`);
         console.log(`track uri: ${track_uri}`);
         console.log('req.query:', req.body);
-        console.log(`acccess token: ${req.session.access_token}`)
+        console.log(`acccess token: ${req.session.access_token}`);
 
         response = await axios({
             method: 'post',
@@ -357,23 +341,15 @@ const addSong = async (req, res) => {
             }
         });
         if (response.status === 201) {
-            console.log("song added to playlist")
-            res.status(200).render('addSongs')
+            console.log("song added to playlist");
+            res.status(200).render('addSongs');
         }
     }
     catch (error) {
         console.error(error);
-        throw error; // This will be caught by the calling function
+        res.status(500).render('error', {status: 500});
     }
 }
     
 
-
-
-
-
-
-
-
-
-module.exports = {home, login, callback, isAuth, getPlaylists, signout, refreshAccessToken, landingPage, generateSongs, addSong}
+module.exports = {home, login, callback, isAuth, getPlaylists, signout, refreshAccessToken, landingPage, generateSongs, addSong};

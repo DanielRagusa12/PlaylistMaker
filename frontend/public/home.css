@@ -1,74 +1,21 @@
-/* * {
-    color : #091c31;
-} */
-/* import sans frans font */
 @font-face {
     font-family: 'SF Pro Display Light';
     src: url('./SF-Pro-Display-Light.woff2') format('woff2');
-    /* Add other formats if available */
     font-weight: normal;
     font-style: normal;
 }
 
-
 body {
     background-color: #151616;
-    /* font-family: 'Roboto', sans-serif; */
-    /* san fransisco font */
     font-family: 'SF Pro Display Light';
-    font-size: 16px;
     margin: 0;
-    padding: 0;
 }
-
-
 
 #navbar {
     background-color: #000000;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    padding: 0.25rem;
-    width: 100%;
-}
-
-#signin {
-    background-color: #000000;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    
-    padding: 1rem;
-    width: 3rem;
-    /* move to the right */
-    margin-left: auto;
-    /* remove underlining */
-    text-decoration: none;
-    /* pad from the right */
-    margin-right: 10rem;
-    /* center text */
-    text-align: center;
-}
-
-
-
-
-#username {
-    background-color: #000000;
-    border: none;
-    border-radius: 1px;
-    color: #fff;
-    cursor: pointer;
-    
-    padding: 0.5rem;
-    width: 5rem;
-    text-decoration: none;
-    margin-right: 0rem;
-    text-align: center;
-
-   
+    height: 70px;
 }
 
 #profilePic {
@@ -78,7 +25,6 @@ body {
 }
 
 .dropdown-content {
-    display: none;
     position: absolute;
     background-color: #000000;
     top: 60px; /* height of the picture plus margin */
@@ -88,83 +34,39 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-
     align-items: center;
     gap: 5px;
-    /* move all the way to the right */
     margin-left: auto;
-    /* move some to the left */
     margin-right: 7rem;
-
- 
 }
 
 #signout {
-    /* remove underlining */
     text-decoration: none;
-    /* add background color */
-    background-color: #000000; /* for example, green */
-    /* change text color */
+    background-color: #000000; 
     color: white;
-    /* add some padding */
     padding: 10px 24px;
-    /* add border */
-    border: none;
-    /* add border radius */
-    border-radius: 4px;
-    /* add cursor pointer */
     cursor: pointer;
-    /* add some hover effect */
     transition: background-color 0.3s ease;
-    /* center text */
     text-align: center;
-    /* add full width */
     width: 20%;
     height: 25%;
     font-size: small;
 }
 
-
-
-#loginmessage {
-    color: #fff;
-    margin-right: 1rem;
-    /* center */
-    text-align: center;
-    /* move down */
-    margin-top: 10rem;
-}
-
 #home {
-    /* remove underlining */
     text-decoration: none;
     color: #fff;
     margin-right: 1rem;
-    /* center */
     text-align: center;
-    /* pad from the left */
     margin-left: 7rem;
-    /* font */
-    font-size: 1.5rem;
-    /* hover color */
-    
-}
-
-#signin:hover, #home:hover {
-    color: #2fff00; /* Change this to the color you want when hovered */
+    font-size: 1.5rem;    
 }
 
 #playlistResultsHeader {
     color: #fff;
-    /* center of page */
     text-align: center;
-    /* font size */
-    font-size: 1.25rem;
-    
+    font-size: 1.25rem;   
 }
-
-
 
 #playlistimg {
     border-radius: 5px;
@@ -175,23 +77,17 @@ body {
 #playlist {
     display: flex;
     justify-content: center;
-    text-decoration: none;
     color: #fff;
     font-size: 0.60rem;
     border: 2px solid #000;
     padding: 10px;
     margin: 25px;
     background-color: #000000;
-
 }
+
 #playlistLeft {
-    flex: 1;
-    
-    /* border */
-    /* border: 2px solid #00ff2f; */
+    flex: 1; 
 }
-
-
 
 /* CSS for large screens */
 @media (min-width: 1200px) {
@@ -226,17 +122,11 @@ body {
     }
 }
 
-
-
 #playlistmetadata {
     flex: 1;
-    margin-top: 0px; /* Or add space above the metadata */
-    /* center */
+    margin-top: 0px; 
     text-align: center;
-    /* border */
-    /* border: 2px solid #00ff2f; */
 }
-
 
 #playlistactions {
     flex: 1;
@@ -244,8 +134,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    /* border */
-    /* border: 2px solid #00ff2f; */
 }
 
 #songandartistname {
@@ -258,12 +146,8 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
-    width: 90%;
-    
+    width: 90%; 
 }
-
-
 
 #generatebutton {
     background-color: #1ED760;
@@ -271,17 +155,10 @@ body {
     border-radius: 5px;
     color: #000000;
     cursor: pointer;
-    
     padding: 0.5rem;
-    
     text-decoration: none;
-    
-    /* pad from the right */
-    /* margin-right: 10rem; */
-    /* center text */
     text-align: center;
     transition: box-shadow 0.2s ease-in-out;
-
 }
 
 #generatebutton:hover, #deleteButton:hover, #addSongButton:hover {
@@ -291,72 +168,36 @@ body {
 #songs {
     padding: 10px;
     margin: 25px;
-    /* border: 2px solid #00ff2f; */
-    /* move up */
     margin-top: 0.1px;
-    /* width: 300px; */
-    /* space betweeb elements */
     animation: wipe 1s ease-out;
-
-    
 }
 
 #spotifylogosongs {
-    /* make circle */
     border-radius: 50%;
-    /* make smaller */
     height: 20px;
     width: 20px;
 }
 
 #spotifylogoplaylists {
-    /* make circle */
     border-radius: 50%;
-    /* make smaller */
     height: 60px;
     width: 60px;
-    /* move right */
-    margin-left: 10px;
-    
+    margin-left: 10px; 
 }
 
 #nopreview {
     color: #ffffff;
     margin-left: 20px;
-    font-size: small;
-    
+    font-size: small;   
 }
-
 
 #previews {
-    /* space between */
     margin-top: 25px;
 }
-
-
-#deleteButton {
-    background-color: #f04b4b;
-    border: none;
-    border-radius: 5px;
-    color: #000000;
-    cursor: pointer;
-    
-    
-    /* move to the right */
-    /* remove underlining */
-    text-decoration: none;
-    /* pad from the right */
-    /* center text */
-    text-align: center;
-    transition: box-shadow 0.2s ease-in-out;
-}
-
-
 
 .loader {
     display: none; /* Hidden by default */
   }
-
 
 .loader.htmx-request {
 width: 48px;
@@ -413,22 +254,16 @@ animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1
 }
 
 #loaderparent {
-    
     display: flex;
     justify-content: center;
-    
-    /* border */
-    /* border: 2px solid #00ff2f; */
 }
 
   #addSongButton {
     background-color: #1ED760;
     border: none;
-    border-radius: 5px;
     color: #000000;
     cursor: pointer;
     padding: 0rem;
-    text-decoration: none;
     text-align: center;
     width: 50px;
     height: 20px;
@@ -439,10 +274,7 @@ animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1
 #addedSongButton {
     background-color: #414141;
     border: none;
-    border-radius: 5px;
     color: #000000;
-    padding: 0rem;
-    text-decoration: none;
     text-align: center;
     width: 50px;
     height: 20px;
@@ -499,16 +331,7 @@ animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1
   [transition-style="in:wipe:cinematic"] {
      animation-name: wipe-cinematic-in;
   }
-
-  /* This will apply to all <video> elements in Chrome and other WebKit-based browsers */
-
-
-  audio::-webkit-media-controls-play-button,
-  audio::-webkit-media-controls-panel {
-    height: 50px;
-    /* center text */
-  }
-
+  
   .toast-message {
     position: fixed;
     bottom: 20px;
@@ -522,15 +345,6 @@ animation: rotation 1s linear infinite, wipe-cinematic-in 1s cubic-bezier(.25, 1
     transition: opacity 0.5s ease;
     z-index: 1000;
   }
-
-
-
-/* video::-webkit-media-controls-play-button {
-
-}
-
-video::-webkit-media-controls-timeline {
-} */
 
 
 

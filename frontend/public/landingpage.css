@@ -16,93 +16,62 @@ body {
     animation: gradient 7s ease infinite;
     background-size: 200% 200%;
     height: 100vh;
-
-
-
 }
 
 #home {
-  /* remove underlining */
   text-decoration: none;
   color: #ffffff;
   margin-right: 1rem;
-  /* center */
   text-align: center;
-  /* pad from the left */
   margin-left: 7rem;
-  /* font */
-  font-size: 1.2rem;
-  /* hover color */
-  
+  font-size: 1.2rem;  
 }
 
-  
-  
-
-
-  #navbar {
-    background-color: #000000;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.25rem;
-    width: 100%;
-    /* transparency */
-    /* blur */
-    /* height */
-    height: 3rem;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+#navbar {
+  background-color: #000000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+  width: 100%;
+  height: 3rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 
 #signin {
-  background-color: #1ED760;
-  border: none;
   color: #ffffff;
   cursor: pointer;
   padding: 1rem;
   width: 3rem;
-  margin-left: auto;
   text-decoration: none;
   margin-right: 10rem;
   text-align: center;
   font-weight: 700;
-  /* rounded corners */
   border-radius: 0.5rem;
-  /* vertically center font */
   display: flex;
   align-items: center;
-  /* height */
   height: 0.5rem;
   background-image: linear-gradient(45deg, #2fff6a 0%, #6fff9d 50%, #05deac 100%);
   animation: gradient 7s ease infinite;
   background-size: 200% 200%;
   transition: background-image 1s ease;
   justify-content: center;
-  
-
 }
 
 #signin:hover {
   color : #ffffff;
   background-image: linear-gradient(45deg, #2ffcff 0%, #6fe9ff 50%, #05a4de 100%);
   animation: gradient 7s ease infinite;
-  background-size: 200% 200%;
-  
+  background-size: 200% 200%; 
 }
 
 #main {
-  /* center div */
   margin: 0 auto;
-  /* width of div */
   width: 50%;
-  /* padding */
   padding: 1rem;
-  /* background color */
-  /* border radius */
   border-radius: 0.5rem;
-  /* margin top */
   margin-top: 5rem;
 }
 
@@ -124,12 +93,11 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3em;
-  color: rgba(255, 255, 255, 0.3); /* Adjust color and opacity as needed */
+  color: rgba(255, 255, 255, 0.3); 
   z-index: -1;
   animation: spin 10s linear infinite;
   font-size: 55rem;
-  filter: blur(75px);
-  
+  filter: blur(75px); 
 }
 
 #spinning-text2 {
@@ -137,12 +105,11 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: rgba(19, 192, 255, 0.219); /* Adjust color and opacity as needed */
+  color: rgba(19, 192, 255, 0.219); 
   z-index: -1;
-  animation: spin 15s linear infinite reverse; /* Add 'reverse' here */
+  animation: spin 15s linear infinite reverse; 
   font-size: 250rem;
   filter: blur(50px);
-  /* bold */
   font-weight: 700;
 }
 
