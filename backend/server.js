@@ -7,8 +7,14 @@ const routes = require('./routes/routes');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
+const serverless = require('serverless-http');
+
+
 
 const app = express();
+
+const handler = serverless(app);
+
 
 app.use((req, res, next) => {
     console.log(req.path, req.method)
