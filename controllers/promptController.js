@@ -101,7 +101,7 @@ const login = (req, res) => {
     response_type: 'code',
     client_id: process.env.CLIENT_ID,
     scope: "user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private",
-    redirect_uri: `http//localhost:${process.env.PORT}/callback`,
+    redirect_uri: `http://localhost:${process.env.PORT}/callback`,
     state: state,
     show_dialog: true
     }));   
@@ -123,7 +123,7 @@ const callback = async (req, res) => {
             
             response = await axios.post('https://accounts.spotify.com/api/token', querystring.stringify({
                 code: code,
-                redirect_uri: "https://htmx-web-app-3e9b7886afe4.herokuapp.com/callback",
+                redirect_uri: `http://localhost:${process.env.PORT}/callback`,
                 grant_type: 'authorization_code'
             }), {
                 headers: {
@@ -194,7 +194,8 @@ const home = async (req, res) => {
         res.status(200).render('index', {
             user_id: req.session.user_id, 
             profile_pic: req.session.profile_pic,
-            user_playlists: req.session.playlists
+            user_playlists: req.session.playlists,
+            PORT: process.env.PORT
         });
     }
 
@@ -286,7 +287,11 @@ const generateSongs = async (req, res) => {
             response = await getRecommendedTracks(req, res, random_track_ids);
             // print resposne items
             console.log(response.data.tracks);
-            res.status(200).render('generatedsongs', {songs: response.data.tracks, playlist_id: playlist.id});
+            res.status(200).render('generatedsongs', {
+                songs: response.data.tracks, 
+                playlist_id: playlist.id,
+                PORT: process.env.PORT
+            });
 
             
            

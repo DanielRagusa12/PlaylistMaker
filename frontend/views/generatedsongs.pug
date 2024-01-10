@@ -4,7 +4,7 @@ div#songs(style='height: 400px; overflow-y: scroll; overflow-x: hidden;')
         h1#songandartistname #{song.name} by #{song.artists[0].name}
         div#previews(style='display: flex; align-items: center; justify-content: space-between;')
             a(href=song.external_urls.spotify, target='_blank')
-                img#spotifylogosongs(src='https://htmx-web-app-3e9b7886afe4.herokuapp.com/spotify.png', alt='Spotify Logo', style='margin-right: 10px;')
+                img#spotifylogosongs(src=`http://localhost:${PORT}/spotify.png`, alt='Spotify Logo', style='margin-right: 10px;')
             if song.preview_url
                 audio#audiocontroller(controls)
                     source(src=song.preview_url, type='audio/mpeg')
