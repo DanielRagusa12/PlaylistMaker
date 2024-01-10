@@ -52,7 +52,7 @@ html
                     if profile_pic
                         img#profilePic.dropdown-toggle(src=profile_pic, onclick='toggleDropdown()', title=user_id)
                     else
-                        img#profilePic.dropdown-toggle(src='http://localhost:4000/default.jpg', onclick='toggleDropdown()', title=user_id)
+                        img#profilePic.dropdown-toggle(src='https://htmx-web-app-3e9b7886afe4.herokuapp.com/default.jpg', onclick='toggleDropdown()', title=user_id)
                     div.dropdown-content(style='display: none;')
                         a#signout(href='/signout') Sign Out
         #main
@@ -72,7 +72,7 @@ html
                                 h1#playlistname #{playlist.name}
                                 h3 #{playlist.tracks.total} tracks
                                 a(href=playlist.external_urls.spotify, target='_blank')
-                                    img#spotifylogoplaylists(src='http://localhost:4000/spotify.png', alt='Spotify Logo', style='margin-right: 10px;')
+                                    img#spotifylogoplaylists(src='https://htmx-web-app-3e9b7886afe4.herokuapp.com/spotify.png', alt='Spotify Logo', style='margin-right: 10px;')
                             #playlistactions
                                 form#addSongsForm(
                                     action=`/generateSongs/${playlist.id}`, 
