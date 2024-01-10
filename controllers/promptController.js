@@ -101,7 +101,7 @@ const login = (req, res) => {
     response_type: 'code',
     client_id: process.env.CLIENT_ID,
     scope: "user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private",
-    redirect_uri: "http://localhost:4000/callback",
+    redirect_uri: "https://htmx-web-app-3e9b7886afe4.herokuapp.com/callback",
     state: state,
     show_dialog: true
     }));   
