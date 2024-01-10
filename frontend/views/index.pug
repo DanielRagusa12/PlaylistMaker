@@ -67,7 +67,7 @@ html
                                 if playlist.images[0]
                                     img#playlistimg(src=playlist.images[0].url)
                                 else
-                                    img#playlistimg(src='http://localhost:4000/default.jpg')
+                                    img#playlistimg(src='https://htmx-web-app-3e9b7886afe4.herokuapp.com/default.jpg')
                             #playlistmetadata
                                 h1#playlistname #{playlist.name}
                                 h3 #{playlist.tracks.total} tracks
