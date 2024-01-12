@@ -57,7 +57,7 @@ The [project](https://htmx-web-app-3e9b7886afe4.herokuapp.com) is deployed using
     ```bash
     npm run dev
     ```
-    The application will be running at: [http://localhost:4000](http://localhost:4000)
+    The application will be running at [http://localhost:4000](http://localhost:4000) by default.
 
 
 
