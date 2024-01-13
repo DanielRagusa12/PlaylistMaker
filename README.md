@@ -1,4 +1,4 @@
-# playlistMaker
+# PlaylistMaker
 
 ## Description
 
@@ -10,12 +10,12 @@ The [project](https://htmx-web-app-3e9b7886afe4.herokuapp.com) is deployed using
 
 1. Clone the dev branch of the repository:
     ```bash
-    git clone -b dev https://github.com/DanielRagusa12/htmx-web-app
+    git clone -b dev https://github.com/DanielRagusa12/PlaylistMaker
     ```
 
 2. Navigate into the project directory:
     ```bash
-    cd htmx-web-app
+    cd PlaylistMaker
     ```
 
 3. Install the necessary dependencies:
