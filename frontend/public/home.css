@@ -89,36 +89,47 @@ body {
     flex: 1; 
 }
 
+/* CSS for extra large screens */
+@media (min-width: 1441px) {
+    #playlistResults {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Align items to the top */
+        margin-left: 45rem;
+        margin-right: 45rem;
+    }
+}
+
 /* CSS for large screens */
-@media (min-width: 1200px) {
+@media (min-width: 1025px) and (max-width: 1440px) {
     #playlistResults {
         display: flex;
         flex-direction: column;
         justify-content: flex-start; /* Align items to the top */
-        margin-left: 35rem;
-        margin-right: 35rem;
+        margin-left: 10rem;
+        margin-right: 10rem;
     }
 }
-  
+
 /* CSS for medium screens */
-@media (min-width: 768px) and (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     #playlistResults {
         display: flex;
         flex-direction: column;
         justify-content: flex-start; /* Align items to the top */
-        margin-left: 5rem;
-        margin-right: 5rem;
+        margin-left: 15rem;
+        margin-right: 15rem;
     }
 }
-  
+
 /* CSS for small screens */
 @media (max-width: 767px) {
     #playlistResults {
         display: flex;
         flex-direction: column;
         justify-content: flex-start; /* Align items to the top */
-        margin-left: 17rem;
-        margin-right: 17rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
     }
 }
 
