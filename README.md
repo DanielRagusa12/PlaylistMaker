@@ -10,7 +10,7 @@ The [project](https://htmx-web-app-3e9b7886afe4.herokuapp.com) is deployed using
 
 1. Clone the dev branch of the repository:
     ```bash
-    git clone -b dev https://github.com/DanielRagusa12/PlaylistMaker
+    git clone -b dev https://github.com/DanielRagusa12/PlaylistMaker.git
     ```
 
 2. Navigate into the project directory:
