@@ -340,7 +340,7 @@ const addSong = async (req, res) => {
                 position: 0
             }
         });
-        if (response.status === 201) {
+        if (response.status === 200) {
             console.log("song added to playlist");
             res.status(200).render('addSongs');
         }
