@@ -345,6 +345,10 @@ const addSong = async (req, res) => {
                 position: 0
             }
         });
+        console.log(`Spotify API response status: ${response.status}`);
+        console.log(`Spotify API response headers: ${JSON.stringify(response.headers)}`);
+        console.log(`Spotify API response body: ${JSON.stringify(response.data)}`);
+
         if (response.status === 201) {
             console.log("song added to playlist");
             res.status(200).render('addSongs');
