@@ -13,6 +13,15 @@ const {
     addSong
 } = require('../controllers/promptController');
 
+router.use((req, res, next) => {
+    if (req.path.endsWith('/') && req.path.length > 1) {
+        const query = req.url.slice(req.path.length);
+        res.redirect(301, req.path.slice(0, -1) + query);
+    } else {
+        next();
+    }
+});
+
 //POST hero
 // router.get('/:lat/:lon/:startDate/:endDate', searchCity)
 router.get('/welcome', landingPage);
