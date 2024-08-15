@@ -1,6 +1,6 @@
 # PlaylistMaker
 
-<img src="assets/demo.gif" width="100%" />
+<img src="assets/demo.gif" width="60%" />
 
 ## Description
 
