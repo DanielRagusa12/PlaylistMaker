@@ -1,12 +1,21 @@
 # PlaylistMaker
 
-<img src="assets/demo.gif" width="60%" />
+
+
+
+<div align="center">
+    <img src="assets/demo.png" width="100%" />
+</div>
 
 ## Description
 
 This is a personal project I developed to learn more about JavaScript and web development. It integrates Spotify OAuth 2.0 for user authentication, stores user session data in a MongoDB database, and provides functionality for users to generate and add recomended songs to their playlists. The recomendations are tailored to the music that already exists within the playlist. Front-end built with Pug and HTMX.
 
 The [project](https://htmx-web-app-3e9b7886afe4.herokuapp.com) is deployed using Heroku.
+
+<div align="center">
+    <img src="assets/demo.gif" width="100%" />
+</div>
 
 ## Installation for local development
 
