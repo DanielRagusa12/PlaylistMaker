@@ -1,5 +1,7 @@
 # PlaylistMaker
 
+<img src="assets/demo.gif" width="100%" />
+
 ## Description
 
 This is a personal project I developed to learn more about JavaScript and web development. It integrates Spotify OAuth 2.0 for user authentication, stores user session data in a MongoDB database, and provides functionality for users to generate and add recomended songs to their playlists. The recomendations are tailored to the music that already exists within the playlist. Front-end built with Pug and HTMX.
