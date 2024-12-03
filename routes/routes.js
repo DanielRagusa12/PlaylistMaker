@@ -5,7 +5,6 @@ const {
     login, 
     callback, 
     isAuth, 
-    getPlaylists, 
     signout, 
     refreshAccessToken, 
     landingPage, 
@@ -22,20 +21,14 @@ router.use((req, res, next) => {
     }
 });
 
-//POST hero
-// router.get('/:lat/:lon/:startDate/:endDate', searchCity)
+// Route definitions
 router.get('/welcome', landingPage);
 router.get("/", isAuth, refreshAccessToken, home);
 router.get("/login", login);
 router.get("/callback", callback);
-router.get("/getPlaylists", isAuth, refreshAccessToken, getPlaylists);
+// Removed the /getPlaylists route
 router.get("/signout", isAuth, refreshAccessToken, signout);
 router.post("/generateSongs/:playlistId", isAuth, refreshAccessToken, generateSongs);
 router.post("/addSong", isAuth, refreshAccessToken, addSong);
-
-
-
-
-
 
 module.exports = router;
