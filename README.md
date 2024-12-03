@@ -13,7 +13,7 @@ This is a personal project I developed to learn more about JavaScript and web de
 
 **Important Note:**
 
-> **Due to Spotify's recent API update and the deprecation of the recommendations endpoint, the site will remain up but can no longer generate recommended songs.**
+> **Due to Spotify's recent API update (11/27/2024) and the deprecation of the recommendations endpoint, the site will remain up but can no longer generate recommended songs. Read more [here](https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api).**
 
 
 The [project](https://htmx-web-app-3e9b7886afe4.herokuapp.com) is deployed using Heroku.
